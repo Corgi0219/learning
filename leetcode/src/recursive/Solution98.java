@@ -44,32 +44,32 @@ package recursive;//给定一个二叉树，判断其是否是一个有效的二
  * }
  */
 class Solution98 {
-    boolean isValidBST = true;
+    long pre = Long.MIN_VALUE;
 
     public boolean isValidBST(TreeNode root) {
         if (root == null) return true;
-        _generate(root, root.val, 0);
-        return isValidBST;
+
+        if (!isValidBST(root.left)) {
+            return false;
+        }
+
+        if (root.val <= pre) {
+            return false;
+        }
+        pre = root.val;
+        return isValidBST(root.right);
     }
 
-    private void _generate(TreeNode node, Integer rootVal, int type) {
-        if (!isValidBST || node == null) {
-            return;
-        }
-        boolean left, right;
-        if (type == 1) {
-            left = node.left != null && (node.left.val >= node.val || node.left.val >= rootVal);
-            right = node.right != null && (node.right.val <= node.val || node.right.val >= rootVal);
-        } else if (type == 2) {
-            left = node.left != null && (node.left.val >= node.val || node.left.val <= rootVal);
-            right = node.right != null && (node.right.val <= node.val || node.right.val <= rootVal);
-        } else {
-            left = node.left != null && node.left.val >= node.val;
-            right = node.right != null && node.right.val <= node.val;
-        }
-        if (left || right) isValidBST = false;
-        _generate(node.left, rootVal, 1);
-        _generate(node.right, rootVal, 2);
+    public boolean _helper(TreeNode root, Integer lower, Integer upper) {
+        if (root == null) return true;
+
+        if (lower != null && root.val <= lower) return false;
+        if (upper != null && root.val >= upper) return false;
+
+        if (!_helper(root.left,lower,root.val)) return false;
+        if (!_helper(root.right,root.val,upper)) return false;
+
+        return true;
     }
 
     public static void main(String[] args) {
