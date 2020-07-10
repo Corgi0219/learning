@@ -32,6 +32,16 @@ import java.lang.annotation.ElementType;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution63 {
+    /**
+     * 动态规划解决
+     * 先说思路，每个格子只能从上方或者左侧走过来，那么到达每个格子的路径树就等于上方和左侧格子路径数的和，由此可以知道DP数组中存储的是从起点到达每个格子的
+     * 路径总和，当方格为障碍物时，则当前格子直接置为0，因为没有路径可以到达，有个特殊情况，即起点为障碍物，那么直接返回0。
+     * 首先初始化DP数组，第一行和第一列的情况相同，当前面有障碍物时，障碍物以及后方的格子只能为0，因为无法通行。
+     * 然后遍历每个方格，当方格不是障碍物时，dp[i][k] = dp[i-1][k] + dp[i][k-1]，当方格是障碍物，直接为0，
+     * 最后返回dp数组的最后一个元素即可
+     * @param obstacleGrid
+     * @return
+     */
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
         if (obstacleGrid[0][0] == 1) return 0;
         int[][] ways = new int[obstacleGrid.length][obstacleGrid[0].length];
