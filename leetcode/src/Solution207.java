@@ -71,4 +71,32 @@ class Solution207 {
         new Solution207().canFinish(2, new int[][]{{0, 1}, {1, 0}});
     }
 }
+
+class Solution207_DFS {
+
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int[] flags = new int[numCourses];
+        for (int i = 0; i < numCourses; i++) {
+            if (!dfs(prerequisites, flags, i)) return false;
+        }
+        return true;
+    }
+
+    private boolean dfs(int[][] prerequisites, int[] flags, int next) {
+        if (flags[next] != 0) return flags[next] == -1;
+        flags[next] = 1;
+        for (int[] line : prerequisites) {
+            if (line[0] == next) if (!dfs(prerequisites, flags, line[1])) return false;
+        }
+        flags[next] = -1;
+        return true;
+    }
+
+    public static void main(String[] args) {
+//        System.out.println(new Solution207_DFS().canFinish(5, new int[][]{{0, 1}, {0, 3}, {1, 3}, {1, 2}, {3, 4}, {2, 4}}));
+        System.out.println(new Solution207_DFS().canFinish(2, new int[][]{{0, 1}, {1, 0}}));
+        System.out.println(new Solution207_DFS().canFinish(4, new int[][]{{2, 0}, {1, 0}, {3, 1}, {3, 2}, {1, 3}}));
+
+    }
+}
 //leetcode submit region end(Prohibit modification and deletion)
