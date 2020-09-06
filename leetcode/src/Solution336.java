@@ -120,7 +120,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        new Solution696().palindromePairs(new String[]{"abcd", "dcba", "lls", "s", "sssll"});
+//        new Solution696().palindromePairs(new String[]{"abcd", "dcba", "lls", "s", "sssll"});
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
