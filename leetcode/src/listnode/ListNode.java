@@ -3,7 +3,7 @@ package listnode;
 
 import java.time.temporal.ValueRange;
 
-class ListNode {
+public class ListNode {
     int val;
     ListNode next;
 

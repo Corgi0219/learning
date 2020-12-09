@@ -1,4 +1,4 @@
-//
+package onehundred;//
 // 
 //
 // 上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 感谢 Mar
@@ -11,7 +11,6 @@
 // Related Topics 栈 数组 双指针
 
 
-import java.util.Arrays;
 import java.util.Stack;
 
 //leetcode submit region begin(Prohibit modification and deletion)
